@@ -1,0 +1,54 @@
+// Custom Navigation Drawer / Sidebar with Image and Icon in Menu Options
+// https://aboutreact.com/custom-navigation-drawer-sidebar-with-image-and-icon-in-menu-options/
+
+import "react-native-gesture-handler";
+
+import * as React from "react";
+import { View, TouchableOpacity, Image } from "react-native";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
+import FirstPage from "./pages/FirstPage";
+import ThirdPage from "./pages/ThirdPage";
+
+// Import Custom Sidebar
+import CustomSidebarMenu from "./CustomSidebarMenu";
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const NavigationDrawerStructure = (props) => {
+  //Structure for the navigatin Drawer
+  const toggleDrawer = () => {
+    //Props to open/close the drawer
+    props.navigationProps.toggleDrawer();
+  };
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: "#e91e63",
+          itemStyle: { marginVertical: 5 },
+        }}
+        drawerContent={(props) => <CustomSidebarMenu {...props} />}
+      >
+        <Drawer.Screen
+          name="FirstPage"
+          options={{ drawerLabel: "First page Option" }}
+          component={firstScreenStack}
+        />
+        <Drawer.Screen
+          name="SecondPage"
+          options={{ drawerLabel: "Second page Option" }}
+          component={secondScreenStack}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
